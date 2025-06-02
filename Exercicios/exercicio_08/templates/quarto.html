@@ -1,0 +1,11 @@
+<html>
+    <body>
+        <h1>Quarto</h1>
+        <ul>
+            {% for key, value in quarto.items() %}
+            <li><a href={{ value }}>{{ key }}</a></li>
+            {% endfor %}
+        </ul>
+        <p>Voltar para <a href="/">página inicial</a>! </p>
+    </body>
+</html>

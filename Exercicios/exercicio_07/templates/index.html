@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <title>Minha Casa</title>
+    </head>
+    <body>
+        <h2>Minha Casa</h2>
+        <h3>Acesse o menu:</h3>
+        <ul>
+            {% for item in menu %}
+            <li><a href="/{{item}}">Listar {{item}}</a></li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>

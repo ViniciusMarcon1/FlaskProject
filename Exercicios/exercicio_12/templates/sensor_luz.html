@@ -1,0 +1,10 @@
+<html>
+    <body>
+        {% extends "bases/devices.html" %}
+        {% block content %}
+        {% for item in sensor_luz.values() %}
+        <h1>{{item}}</h1>
+        {% endfor %}
+        {% endblock %}
+    </body>
+</html>

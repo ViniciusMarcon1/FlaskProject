@@ -1,0 +1,12 @@
+<html>
+    <body>
+        {% extends "bases/room.html" %}
+        {% block content %}
+        <ul>
+            {% for key, value in quarto.items() %}
+            <li><a href={{ value }}>{{ key }}</a></li>
+            {% endfor %}
+        </ul>
+        {% endblock %}
+    </body>
+</html>

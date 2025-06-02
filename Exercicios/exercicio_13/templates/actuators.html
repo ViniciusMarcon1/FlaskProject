@@ -1,0 +1,12 @@
+<html>
+    <body>
+        {% extends "base1.html" %} 
+        {% block content %}
+        <ul>
+            {% for actuator, value in atuadores.items() %}
+            <li>{{ actuator }}: {{value}}</li>
+            {% endfor %}
+        </ul>
+        {% endblock %}
+    </body>
+</html>

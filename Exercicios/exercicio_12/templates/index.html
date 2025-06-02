@@ -1,0 +1,14 @@
+<html>
+    <head>
+        <title>Menu Principal</title>
+    </head>
+    <body>
+        <h2>Minha Casa</h2>
+        <h3>Acesse o menu:</h3>
+        <ul>
+            {% for key, value in index.items() %}
+            <li><a href={{ value }}>Ir para {{ key }}</a></li>
+            {% endfor %}
+        </ul>
+    </body>
+</html> 
