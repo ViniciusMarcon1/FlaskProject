@@ -7,6 +7,10 @@ users = {
 'user2': '1234'
 }
 
+sensors_dict = {
+
+}
+
 @app.route('/')
 def index():
     return render_template('login.html')
@@ -37,8 +41,26 @@ def add_user():
     else:
         user = request.args.get('user', None)
         password = request.args.get('password', None)
-        users[user] = password
-        return render_template("users.html", devices=users)
+    
+    users[user] = password
+    return render_template("users.html", devices=users)
+    
+@app.route('/register_sensor')
+def register_sensor():
+    return render_template("register_sensor.html")
+
+@app.route('/add_sensor', methods=['GET','POST'])
+def add_sensor():
+    global sensors_dict
+    if request.method == 'POST':
+        sensor = request.form['sensor']
+        value = int(request.form['value'])
+    else:
+        sensor = request.args.get('sensor', None)
+        value = int(request.args.get('value', None))
+    
+    sensors_dict[sensor] = value
+    return render_template("sensors.html", sensores=sensors_dict)
     
 @app.route('/list_users')
 def list_users():
@@ -56,8 +78,7 @@ def actuators():
 
 @app.route('/sensors')
 def sensors():
-    sensores = {'T1':56, 'T2':25, 'T3':15}
-    return render_template("sensors.html", sensores=sensores)
+    return render_template("sensors.html", sensores=sensors_dict)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8080,debug=True)
