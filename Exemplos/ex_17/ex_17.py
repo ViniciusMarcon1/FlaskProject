@@ -1,37 +1,22 @@
-# app.py
-from flask import Flask, render_template, redirect, url_for, request
-from login import login
-from sensors import sensors
-from actuators import actuators
+from flask import Flask, render_template, request
+from werkzeug.utils import secure_filename
+import os
 
-app= Flask(__name__)
-
-app.register_blueprint(login, url_prefix='/')
-app.register_blueprint(sensors, url_prefix='/')
-app.register_blueprint(actuators, url_prefix='/')
+app = Flask(__name__)
 
 @app.route('/')
-def index():
-    return render_template('login.html')
-  
-@app.route('/home')
-def home():
-    return render_template("home.html")
+def main():
+    return render_template("index.html")
 
 @app.route('/upload_file', methods = ['POST'])
 def success():
     if request.method == 'POST':
         f = request.files['file']
-        f.save('static/img/' + f.filename)
-        return "ok" 
-
-# @app.route('/actuators')
-# def actuators():
-#     return render_template("actuators.html", atuadores=atuadores)
-
-# @app.route('/sensors')
-# def sensors():
-#     return render_template("sensors.html", sensores=sensores)
+        filename = secure_filename(f.filename)
+        save_path = os.path.join(app.root_path, 'static', 'img', filename)
+        os.makedirs(os.path.dirname(save_path), exist_ok=True)  # Garante que a pasta exista
+        f.save(save_path)
+        return f"Arquivo {filename} salvo com sucesso!"
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=8080,debug=True)
+    app.run(host='0.0.0.0', port=8080, debug=True)
